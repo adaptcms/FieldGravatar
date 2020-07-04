@@ -13,7 +13,7 @@ export default {
     'value',
     'field',
     'model',
-    'module',
+    'package',
     'action'
   ],
 
@@ -24,10 +24,15 @@ export default {
   computed: {
     email () {
       let value = null
-      let emailField = get(this.field, 'meta.emailField', null)
+      let emailFieldId = get(this.field, 'meta.emailField', null)
+      let emailField = null
+
+      if (emailFieldId) {
+        emailField = this.package.package_fields.find(row => row.id === emailFieldId)
+      }
 
       if (emailField) {
-        value = (typeof this.model[emailField] !== 'undefined' ? this.model[emailField] : null)
+        value = (typeof this.model[emailField.column_name] !== 'undefined' ? this.model[emailField.column_name] : null)
       }
 
       return value

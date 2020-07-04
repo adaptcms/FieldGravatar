@@ -13,7 +13,7 @@ export default {
     'value',
     'field',
     'model',
-    'module',
+    'package',
     'action'
   ],
 
@@ -28,7 +28,7 @@ export default {
       let emailField = null
 
       if (emailFieldId) {
-        emailField = this.module.module_fields.find(row => row.id === emailFieldId)
+        emailField = this.package.package_fields.find(row => row.id === emailFieldId)
       }
 
       if (emailField) {
