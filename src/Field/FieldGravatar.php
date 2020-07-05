@@ -13,4 +13,16 @@ class FieldGravatar extends FieldType
   * @var boolean
   */
   public $shouldNotSetData = true;
+
+  /**
+  * Create Field Rules
+  *
+  * @return array
+  */
+  public function createFieldRules()
+  {
+    return [
+      'meta.emailField' => 'required'
+    ];
+  }
 }

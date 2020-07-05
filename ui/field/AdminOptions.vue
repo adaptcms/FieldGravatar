@@ -20,6 +20,12 @@
         </option>
       </template>
     </SelectField>
+
+    <template v-if="errorsList.length">
+      <span v-for="error in errorsList" :key="error" class="border-red-700 block px-2 py-2 text-sm text-red-100 bg-red-500">
+        {{ error }}
+      </span>
+    </template>
   </div>
 </template>
 
@@ -51,6 +57,22 @@ export default {
       if (newVal !== oldVal) {
         this.$emit('input', { emailField: newVal })
       }
+    }
+  },
+
+  computed: {
+    hasError () {
+      let key = 'meta.emailField'
+      let errors = get(this.$page, 'errors')
+
+      return (typeof errors[key] !== 'undefined')
+    },
+
+    errorsList () {
+      let key = 'meta.emailField'
+      let errors = get(this.$page, 'errors')
+
+      return (typeof errors[key] !== 'undefined' ? errors[key] : [])
     }
   },
 
