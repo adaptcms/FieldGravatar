@@ -44,4 +44,16 @@ class FieldGravatar extends FieldType
       'meta.emailField' => 'required'
     ];
   }
+
+  /**
+  * Update Field Rules
+  *
+  * @return array
+  */
+  public function updateFieldRules()
+  {
+    return [
+      'meta.emailField' => 'required'
+    ];
+  }
 }
