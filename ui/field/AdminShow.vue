@@ -6,7 +6,7 @@
 
 <script>
 import { get } from 'lodash'
-import Gravatar from 'vue-gravatar'
+import Gravatar from '@/Adaptcms/FieldGravatar/ui/components/Gravatar'
 
 export default {
   props: [

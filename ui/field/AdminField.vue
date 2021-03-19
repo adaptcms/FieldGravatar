@@ -7,12 +7,16 @@
 <script>
 export default {
   props: [
-    'value',
+    'modelValue',
     'field',
     'errors',
     'formMeta',
     'model',
     'action'
+  ],
+
+  emits: [
+    'update:modelValue'
   ]
 }
 </script>

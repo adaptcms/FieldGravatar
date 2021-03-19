@@ -35,11 +35,15 @@ import SelectField from '@/Adaptcms/Base/ui/components/Form/SelectField'
 
 export default {
   props: [
-    'value',
+    'modelValue',
     'field',
     'package',
     'errors',
     'fields'
+  ],
+
+  emits: [
+    'update:modelValue'
   ],
 
   components: {
@@ -47,7 +51,7 @@ export default {
   },
 
   watch: {
-    value (newVal, oldVal) {
+    modelValue (newVal, oldVal) {
       if ((newVal !== oldVal) && get(newVal, 'emailField', null)) {
         this.emailField = newVal.emailField
       }
@@ -55,7 +59,7 @@ export default {
 
     emailField (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.$emit('input', { emailField: newVal })
+        this.$emit('update:modelValue', { emailField: newVal })
       }
     }
   },
@@ -63,16 +67,14 @@ export default {
   computed: {
     hasError () {
       let key = 'meta.emailField'
-      let errors = get(this.$page, 'props.errors')
 
-      return (typeof errors[key] !== 'undefined')
+      return (typeof this.errors[key] !== 'undefined')
     },
 
     errorsList () {
       let key = 'meta.emailField'
-      let errors = get(this.$page, 'props.errors')
 
-      return (typeof errors[key] !== 'undefined' ? errors[key] : [])
+      return (typeof this.errors[key] !== 'undefined' ? this.errors[key].messages : [])
     }
   },
 
@@ -83,8 +85,8 @@ export default {
   },
 
   mounted () {
-    if (!this.emailField && get(this.value, 'emailField', null)) {
-      this.emailField = this.value.emailField
+    if (!this.emailField && get(this.modelValue, 'emailField', null)) {
+      this.emailField = this.modelValue.emailField
     } else {
       this.emailField = this.fields[0].id
     }
